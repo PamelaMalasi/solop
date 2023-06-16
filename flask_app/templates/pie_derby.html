@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <title>Dashboard</title>
+
+    <style>
+
+.container3 {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-size: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  background-color: white;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #ebebeb;
+}
+
+td {
+  padding: 10px;
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
+    </style>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="/first">
+            <img src="static\img\logooo.png" alt="" class="logo">
+        </a>
+        
+            <nav>
+                
+                <ul>
+                    <li>  <form action="/first">
+                        <input type="submit" value="Dashboard" style="width: 90px; height: 40px;">
+                    </form>
+                     </li>
+                    <li><form action="/pies">
+                        <input type="submit" value="Concerns" style="width: 90px; height: 40px;">
+                    </form></li>
+                    <li><form action="/logout">
+                        <input type="submit" value="Log Out" style="width: 90px; height: 40px;">
+                    </form></li>
+
+                    
+                   
+                </ul>
+            </nav>
+        </div>
+        <div class="container3">
+            <h1 style="font-size: 50px; color: rgb(132, 204, 132)">Volunteering Opportunities</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concern</th>
+                        <th>By</th>
+                        <th>Volunteer</th>
+                    </tr>
+                </thead>
+                {% for pie in pies %}
+                <tr>
+                    <td>
+                        <a href="/show/{{ pie['id'] }}">{{ pie['name'] }}</a>
+                    </td>
+                    <td>{{ pie['first_name'] }}</td>
+                    <td>{{ pie['votes'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        
+</body>
+</html>
+

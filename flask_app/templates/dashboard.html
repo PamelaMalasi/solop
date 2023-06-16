@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="/first">
+            <img src="static\img\logooo.png" alt="" class="logo">
+        </a>
+            <nav>
+                <ul>
+                    <li><form action="/pies">
+                        <input type="submit" value="Concerns" style="width: 90px; height: 40px;">
+                    </form></li>
+                    <li><form action="/logout">
+                        <input type="submit" value="Log Out" style="width: 90px; height: 40px;">
+                    </form></li>
+                   
+                </ul>
+            </nav>
+        </div>
+        <div class="container1">
+            <div class="card0">
+                <div class="card-body">
+                    <h1 class="card-title">{{this_user.first_name}}'s Posts</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Concern</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pie in this_user_pies %}
+                            <tr>
+                                <td>{{ pie.name }}</td>
+                                <td>
+                                    <a href="/edit/{{ pie.id }}">Edit</a>
+                                    <a href="/delete/{{ pie.id }}">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="card0">
+                <div class="card-body">
+                    <h1 class="card-title">Share Your Concern</h1>
+                    {% with messages = get_flashed_messages(category_filter=['add_pie']) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <form action="/add_pie" method="post">
+                        <div class="form-group">
+                            <label for="name">Concern:</label>
+                            <input type="text" class="form-control" name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="filling">Location:</label>
+                            <input type="text" class="form-control" name="filling" id="filling">
+                        </div>
+                        <div class="form-group">
+                            <label for="crust">Contact:</label>
+                            <input type="text" class="form-control" name="crust" id="crust">
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image:</label>
+                            <input type="file" class="form-control" name="image" id="image">
+                        </div>
+                        {% with messages = get_flashed_messages(category_filter=['postImage']) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="text-danger text-center">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <input type="submit" class="btn" value="Add">
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+</body>
+</html>

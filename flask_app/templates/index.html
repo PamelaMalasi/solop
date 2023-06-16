@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Welcome</title>
+</head>
+
+<body>
+    <div class="hero">
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" id="btn">Log In</button>
+                <a href="/new">
+                <button type="button" class="toggle-btn">Register</button>
+            </a>
+            </div>
+            <div class="social-icons">
+                <img src="static\img\gp.png" alt="">
+                <img src="static\img\tw.png"  alt=""> 
+                <img src="static\img\fb.png"  alt=""> 
+            </div>
+            <form class="input-group" action="/login", method="post">
+                {% with messages = get_flashed_messages(category_filter=['login']) %}     <!-- declare a variable called messages -->
+            {% if messages %}                            <!-- check if there are any messages -->
+                {% for message in messages %}            <!-- loop through the messages -->
+                    <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+                <input type="email" class="input-field" placeholder="Enter your email" name="email" id="username">
+        
+
+                <input type="password" class="input-field" placeholder="Enter password" id="password" name="password">
+               
+
+
+                <input type="checkbox" class="chech-box"><span></span>
+
+
+            <button type="submit" class="submit-btn">Log In</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

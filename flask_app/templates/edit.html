@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="/first">
+            <img src="static\img\logooo.png" alt="" class="logo">
+        </a>
+        
+            <nav>
+                
+                <ul>
+                    <li>  <form action="/first">
+                        <input type="submit" value="Dashboard" style="width: 90px; height: 40px;">
+                    </form>
+                     </li>
+                    <li><form action="/pies">
+                        <input type="submit" value="Concerns" style="width: 90px; height: 40px;">
+                    </form></li>
+                    <li><form action="/logout">
+                        <input type="submit" value="Log Out" style="width: 90px; height: 40px;">
+                    </form></li>
+
+                    
+                   
+                </ul>
+            </nav>
+        </div>
+        <div class="container1">
+            <div class="card0">
+                <div class="card-body">
+                    <h1 class="card-title">Edit {{this_pie.name}}</h1>
+        
+                        <form action="/edit_pie/{{this_pie.id}}" method="post">
+                            {% with messages = get_flashed_messages(category_filter=['add_pie']) %}     
+                                {% if messages %}                            
+                                    {% for message in messages %}            
+                                        <p>{{message}}</p>                   
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            <div>
+                                <label for="name">Concern: </label>
+                                <input type="text" name="name" id="" value="{{this_pie.name}}">
+                            </div>
+                            <div>
+                                <label for="filling">Location: </label>
+                                <input type="text" name="filling" value="{{this_pie.filling}}"> 
+                            </div>
+                            <div>
+                                <label for="crust">Contact: </label>
+                                <input type="text" name="crust" id="" value="{{this_pie.crust}}">
+                            </div>
+                            <input type="submit" name="" id="" value="Edit" style="width: 90px; height: 40px; margin-top: 10px;">
+                        </form>
+                </div>
+            </div>
+        </div>
+        </div>
+</body>
+</html>
+
+
+

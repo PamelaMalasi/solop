@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <title>Dashboard</title>
+</head>
+<style>
+.container10 {
+  max-width: 600px;
+  height: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.5);
+}
+
+.pie-info {
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 10px;
+  margin: 30px;
+}
+
+.vote-section {
+  text-align: center;
+}
+
+form {
+  display: inline-block;
+}
+
+
+
+</style>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="/first">
+            <img src="static\img\logooo.png" alt="" class="logo">
+        </a>
+        
+            <nav>
+                
+                <ul>
+                    <li>  <form action="/first">
+                        <input type="submit" value="Dashboard" style="width: 90px; height: 40px;">
+                    </form>
+                     </li>
+                    <li><form action="/pies">
+                        <input type="submit" value="Concerns" style="width: 90px; height: 40px;">
+                    </form></li>
+                    <li><form action="/logout">
+                        <input type="submit" value="Log Out" style="width: 90px; height: 40px;">
+                    </form></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container10">
+            <div class="pie-info">
+                <h1 style="font-size: 60px;">{{ pie['name'] }}</h1>
+                <p style="font-size: 30px;">Location: {{ pie['filling'] }}</p>
+                <p style="font-size: 30px;">Contact: {{ pie['crust'] }} </p>
+            </div>
+            <div class="vote-section">
+                <p style="font-size: 20px; color: rgb(37, 113, 74)">Will you volunteer?</p>
+                {% if pie['consumer_id'] == session['user_id'] %}
+                    <form action="/dislike/{{ pie['id'] }}" method="post">
+                        <input type="submit" value="Volunteer" style="width: 90px; height: 40px;">
+                    </form>
+                {% else %}
+                    <form action="/like/{{ pie['id'] }}" method="post">
+                        <input type="submit" value="Undo" style="width: 90px; height: 40px;">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        
+        
+
+</body>
+</html>
